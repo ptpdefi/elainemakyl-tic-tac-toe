@@ -1,14 +1,26 @@
-import React, {useState, FC} from 'react';
+import React, {useState, FC, useEffect} from 'react';
 import Panel from './Panel';
 import styled from 'styled-components';
 import Grid from './Grid';
 import Modal from './Modal';
+import {isFilledBoard} from './utils';
 
 const Board: FC = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
   const [curPlayerCross, setCurPlayerCross] = useState(true); // default player_x first
   const [winner, setWinner] = useState();
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    // determine if the game is over
+    console.log(board);
+    const checkOver = () => {
+      return isFilledBoard(board);
+    };
+
+    const isOver = checkOver();
+    setShowModal(isOver);
+  }, [board.toString()]);
 
   /*updating the board */
   const makeMoveHandler = (idx: number) => {
