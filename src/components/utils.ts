@@ -29,6 +29,6 @@ export const determineWinner = (board: Array<string | null>): string | null => {
       winner = 'tie';
     }
   }
-  console.log('WINNIER', winner);
+
   return winner;
 };
