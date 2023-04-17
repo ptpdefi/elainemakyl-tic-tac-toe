@@ -1,15 +1,27 @@
-import React from 'react';
+import React, {FC, ReactNode} from 'react';
 import styled from 'styled-components';
 
 interface IProps {
-  text: string;
+  text?: string;
   bgColor?: string;
   handler: () => void;
+  children?: ReactNode;
+  styleOpt?: string;
 }
 
 interface IButtonWrapper {
   bgColor?: string;
+  styleOpt?: string;
 }
+
+const Button: FC<IProps> = ({text, bgColor, handler, children, styleOpt}) => {
+  return (
+    <ButtonWrapper bgColor={bgColor} onClick={handler} styleOpt={styleOpt}>
+      {text}
+      {children}
+    </ButtonWrapper>
+  );
+};
 
 const ButtonWrapper = styled.button<IButtonWrapper>`
   background-color: ${({bgColor: bg}) => bg};
@@ -25,15 +37,8 @@ const ButtonWrapper = styled.button<IButtonWrapper>`
   &:hover {
     cursor: pointer;
   }
-`;
 
-const Button = (props: IProps) => {
-  const {text, bgColor, handler} = props;
-  return (
-    <ButtonWrapper bgColor={bgColor} onClick={handler}>
-      {text}
-    </ButtonWrapper>
-  );
-};
+  ${({styleOpt}) => styleOpt}
+`;
 
 export default Button;
