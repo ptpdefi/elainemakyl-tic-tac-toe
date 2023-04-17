@@ -21,7 +21,7 @@ const Modal: FC<IProps> = ({
 }) => {
   const determineHeading = () => {
     if (winner === 'tie') return null;
-    const player = winner === 'o' ? 1 : 2;
+    const player = winner === 'x' ? 1 : 2;
     return `Player ${player} wins!`;
   };
 
