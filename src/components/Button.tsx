@@ -36,6 +36,7 @@ const ButtonWrapper = styled.button<IButtonWrapper>`
 
   &:hover {
     cursor: pointer;
+    opacity: 0.8;
   }
 
   ${({styleOpt}) => styleOpt}

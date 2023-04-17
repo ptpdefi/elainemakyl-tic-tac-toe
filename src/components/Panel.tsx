@@ -7,10 +7,11 @@ import Button from './Button';
 
 interface IProps {
   isCross: boolean;
+  resetHandler: () => void;
 }
 
 const Panel = (props: IProps) => {
-  const {isCross} = props;
+  const {isCross, resetHandler} = props;
   return (
     <PanelWrapper>
       <LogoWrapper>
@@ -28,8 +29,13 @@ const Panel = (props: IProps) => {
       </CurrentPlayerWrapper>
 
       <Button
-        handler={() => {}}
-        styleOpt="padding: 16px; box-shadow: inset 0px -4px 0px #6B8997;"
+        handler={resetHandler}
+        styleOpt={`
+          padding: 16px;
+          box-shadow: inset 0px -4px 0px #6B8997;
+          font-size:0px;
+          line-height: 0px;
+        `}
       >
         <ReloadIcon />
       </Button>
@@ -52,6 +58,7 @@ const LogoWrapper = styled.div`
 const CurrentPlayerWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 13px;
   padding: 13px 30px;
   background: #1f3641;
@@ -77,27 +84,4 @@ const CurrentPlayerWrapper = styled.div`
   }
 `;
 
-// const CrossIcon = styled.span`
-//   width: 32px;
-//   height: 32px;
-//   opacity: 1;
-
-//   &:before,
-//   &:after {
-//     position: absolute;
-//     left: 16px;
-//     content: ' ';
-//     height: 33px;
-//     width: 2px;
-//     background-color: #fff;
-//   }
-
-//   &:before {
-//     transform: rotate(45deg);
-//   }
-
-//   &:after {
-//     transform: rotate(-45deg);
-//   }
-// `;
 export default Panel;
