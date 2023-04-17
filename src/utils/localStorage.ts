@@ -1,4 +1,4 @@
-export const setLocalItem = (key: string, value: any) => {
+export const setLocalItem = (key: string, value: number) => {
   global.window?.localStorage?.setItem(key, JSON.stringify(value));
 };
 
