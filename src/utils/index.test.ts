@@ -1,4 +1,4 @@
-import {isFilledBoard, determineWinner} from './utils';
+import {isFilledBoard, determineWinner} from './index';
 
 describe('isFilledBoard', () => {
   it('should return true for a filled board', () => {

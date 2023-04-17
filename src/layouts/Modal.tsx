@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import styled from 'styled-components';
-import Button from './Button';
-import {ReactComponent as CircleIcon} from './svg/circle.svg';
-import {ReactComponent as CrossIcon} from './svg/cross.svg';
+import Button from '../components/Button';
+import {ReactComponent as CircleIcon} from '../components/svg/circle.svg';
+import {ReactComponent as CrossIcon} from '../components/svg/cross.svg';
 
 interface IProps {
   winner: string | null;

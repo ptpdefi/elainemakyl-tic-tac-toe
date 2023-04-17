@@ -2,8 +2,8 @@ import React, {useState, FC, useEffect} from 'react';
 import Panel from './Panel';
 import styled from 'styled-components';
 import Grid from './Grid';
-import Modal from '../components/Modal';
-import {determineWinner} from '../components/utils';
+import Modal from './Modal';
+import {determineWinner} from '../utils';
 
 const Board: FC = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
