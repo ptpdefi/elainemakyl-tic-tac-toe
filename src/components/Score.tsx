@@ -5,12 +5,13 @@ interface IProps {
   player: string;
   score: number;
   bgColor?: string;
+  testid: string;
 }
 
-const Score: FC<IProps> = ({player, score, bgColor}) => (
+const Score: FC<IProps> = ({player, score, bgColor, testid}) => (
   <StatsContainer bgColor={bgColor}>
     <Player> {player} </Player>
-    <ScoreSpan>{score}</ScoreSpan>
+    <ScoreSpan data-testid={testid}>{score}</ScoreSpan>
   </StatsContainer>
 );
 

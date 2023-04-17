@@ -50,9 +50,19 @@ const Board: FC<IProps> = ({winner}) => {
 
   return (
     <StatsWrapper>
-      <Score player="X (P1)" score={xWins} bgColor="#31C3BD"></Score>
-      <Score player="Ties" score={ties} bgColor="#A8BFC9"></Score>
-      <Score player="O (P2)" score={oWins} bgColor="#F2B137;"></Score>
+      <Score
+        player="X (P1)"
+        score={xWins}
+        bgColor="#31C3BD"
+        testid="xWins"
+      ></Score>
+      <Score player="Ties" score={ties} bgColor="#A8BFC9" testid="ties"></Score>
+      <Score
+        player="O (P2)"
+        score={oWins}
+        bgColor="#F2B137;"
+        testid="oWins"
+      ></Score>
     </StatsWrapper>
   );
 };
