@@ -30,7 +30,6 @@ const Board: FC<IProps> = ({winner}) => {
   }, []);
 
   useEffect(() => {
-    console.log('update local storage');
     // Update localStorage with new win/loss/tie data
     setLocalItem('X_WINS_KEY', String(xWins));
     setLocalItem('O_WINS_KEY', String(oWins));
