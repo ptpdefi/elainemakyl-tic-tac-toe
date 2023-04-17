@@ -1,17 +1,16 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styled from 'styled-components';
-import {ReactComponent as CrossIcon} from './svg/cross.svg';
-import {ReactComponent as CircleIcon} from './svg/circle.svg';
-import {ReactComponent as ReloadIcon} from './svg/reload.svg';
-import Button from './Button';
+import {ReactComponent as CrossIcon} from '../components/svg/cross.svg';
+import {ReactComponent as CircleIcon} from '../components/svg/circle.svg';
+import {ReactComponent as ReloadIcon} from '../components/svg/reload.svg';
+import Button from '../components/Button';
 
 interface IProps {
   isCross: boolean;
   resetHandler: () => void;
 }
 
-const Panel = (props: IProps) => {
-  const {isCross, resetHandler} = props;
+const Panel: FC<IProps> = ({isCross, resetHandler}) => {
   return (
     <PanelWrapper>
       <LogoWrapper>
@@ -21,9 +20,19 @@ const Panel = (props: IProps) => {
 
       <CurrentPlayerWrapper>
         {isCross ? (
-          <CrossIcon width="22px" height="22px" />
+          <CrossIcon
+            width="22px"
+            height="22px"
+            data-testid="current-player-icon"
+            data-icon="cross"
+          />
         ) : (
-          <CircleIcon width="22px" height="22px" />
+          <CircleIcon
+            width="22px"
+            height="22px"
+            data-testid="current-player-icon"
+            data-icon="circle"
+          />
         )}
         <span>Turn</span>
       </CurrentPlayerWrapper>

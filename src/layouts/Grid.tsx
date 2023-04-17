@@ -1,8 +1,7 @@
 import React, {FC} from 'react';
 import styled from 'styled-components';
-import Square from './Square';
+import Square from '../components/Square';
 
-type Sign = 'x' | 'o' | null;
 interface IProps {
   board: Array<string | null>;
   makeMoveHandler: (idx: number) => void;

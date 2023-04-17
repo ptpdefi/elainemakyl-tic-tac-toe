@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, FC} from 'react';
 import Button from './components/Button';
-import Board from './components/Board';
+import Board from './layouts/Board';
 import styled from 'styled-components';
 
-function App() {
+const App: FC = () => {
   const [started, setStarted] = useState(false);
 
   const newGameBtnHandler = () => {
@@ -19,7 +19,7 @@ function App() {
       )}
     </AppContainer>
   );
-}
+};
 
 const AppContainer = styled.div`
   display: flex;

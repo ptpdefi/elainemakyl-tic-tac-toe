@@ -7,15 +7,17 @@ interface IProps {
   sign: string | null;
   makeMoveHandler: (idx: number) => void;
   idx: number;
+  key: string;
 }
 
 const Square: FC<IProps> = ({sign, makeMoveHandler, idx}) => {
-  if (!sign) {
-    return <SquareButton onClick={() => makeMoveHandler(idx)} />;
-  }
   return (
-    <SquareButton onClick={() => makeMoveHandler(idx)}>
-      {sign === 'x' ? <CrossIcon /> : <CircleIcon />}
+    <SquareButton
+      onClick={() => makeMoveHandler(idx)}
+      data-testid={`ele_${idx}`}
+    >
+      {sign === 'x' && <CrossIcon id="cross" />}
+      {sign === 'o' && <CircleIcon id="circle" />}
     </SquareButton>
   );
 };

@@ -2,8 +2,8 @@ import React, {useState, FC, useEffect} from 'react';
 import Panel from './Panel';
 import styled from 'styled-components';
 import Grid from './Grid';
-import Modal from './Modal';
-import {determineWinner} from './utils';
+import Modal from '../components/Modal';
+import {determineWinner} from '../components/utils';
 
 const Board: FC = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
@@ -53,7 +53,7 @@ const Board: FC = () => {
   };
 
   return (
-    <BoardWrapper isDimmed={showModal}>
+    <BoardWrapper isDimmed={showModal} data-testid="board">
       <Panel isCross={curPlayerCross} resetHandler={resetHandler} />
       <Grid board={board} makeMoveHandler={makeMoveHandler} />
       {showModal && (
