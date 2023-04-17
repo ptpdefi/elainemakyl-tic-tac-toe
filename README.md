@@ -30,7 +30,7 @@ The whole day 🥲. I have spent quite a long time on writing Typescript (I'm pr
 
 1. Writing more test cases: Currently it's not enough to cover the basic functionality, so I need to find a way to solve the svg issue as mentioned above so I can add more test cases to meet a certain level of threshold.
 
-2. Implementing 4th flow: can use `window.localStorage` to store the game stats as an object. For example:
+2. Implementing 4th flow: can use `window.localStorage` to store the game stats as an object. For example: (done)
 
 ```json
 {
