@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import Grid from './Grid';
 import Modal from './Modal';
 import {determineWinner} from '../utils';
+import Stats from './Stats';
 
 const Board: FC = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
   const [curPlayerCross, setCurPlayerCross] = useState(true); // default player_x first
   const [winner, setWinner] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
-  const [isOver, setOver] = useState(false);
 
   /* convert the board array to a string is easier to compare state change */
   useEffect(() => {
@@ -18,7 +18,6 @@ const Board: FC = () => {
     const finalWinner = determineWinner(board);
     if (finalWinner) {
       setWinner(finalWinner);
-      setOver(true);
       setShowModal(true);
     }
   }, [board.toString()]);
@@ -26,10 +25,11 @@ const Board: FC = () => {
   /*updating the board */
   const makeMoveHandler = (idx: number) => {
     const boardCopy = board;
-    if (!isOver && board[idx] === null) {
+    if (!winner && board[idx] === null) {
       boardCopy[idx] = curPlayerCross ? 'x' : 'o';
       setBoard(boardCopy);
       setCurPlayerCross(!curPlayerCross);
+      setWinner(null);
     }
   };
 
@@ -37,7 +37,7 @@ const Board: FC = () => {
   const resetHandler = () => {
     setBoard(new Array(9).fill(null));
     setCurPlayerCross(true);
-    setOver(false);
+    setWinner(null);
   };
 
   /* dismiss the modal */
@@ -49,13 +49,14 @@ const Board: FC = () => {
     setShowModal(false);
     setBoard(new Array(9).fill(null));
     setCurPlayerCross(true);
-    setOver(false);
+    setWinner(null);
   };
 
   return (
     <BoardWrapper isDimmed={showModal} data-testid="board">
       <Panel isCross={curPlayerCross} resetHandler={resetHandler} />
       <Grid board={board} makeMoveHandler={makeMoveHandler} />
+      <Stats winner={winner} />
       {showModal && (
         <Modal
           winner={winner}
