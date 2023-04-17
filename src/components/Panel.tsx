@@ -23,7 +23,7 @@ const Panel = (props: IProps) => {
         {isCross ? (
           <CrossIcon width="22px" height="22px" />
         ) : (
-          <CircleIcon width="22px" height="22xpx" />
+          <CircleIcon width="22px" height="22px" />
         )}
         <span>Turn</span>
       </CurrentPlayerWrapper>
