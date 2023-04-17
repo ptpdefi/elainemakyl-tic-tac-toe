@@ -3,29 +3,30 @@ import Panel from './Panel';
 import styled from 'styled-components';
 import Grid from './Grid';
 import Modal from './Modal';
-import {isFilledBoard} from './utils';
+import {determineWinner} from './utils';
 
 const Board: FC = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
   const [curPlayerCross, setCurPlayerCross] = useState(true); // default player_x first
-  const [winner, setWinner] = useState();
+  const [winner, setWinner] = useState<string | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [isOver, setOver] = useState(false);
 
+  /* convert the board array to a string is easier to compare state change */
   useEffect(() => {
     // determine if the game is over
-    console.log(board);
-    const checkOver = () => {
-      return isFilledBoard(board);
-    };
-
-    const isOver = checkOver();
-    setShowModal(isOver);
+    const finalWinner = determineWinner(board);
+    if (finalWinner) {
+      setWinner(finalWinner);
+      setOver(true);
+      setShowModal(true);
+    }
   }, [board.toString()]);
 
   /*updating the board */
   const makeMoveHandler = (idx: number) => {
     const boardCopy = board;
-    if (board[idx] === null) {
+    if (!isOver && board[idx] === null) {
       boardCopy[idx] = curPlayerCross ? 'x' : 'o';
       setBoard(boardCopy);
       setCurPlayerCross(!curPlayerCross);
@@ -36,6 +37,7 @@ const Board: FC = () => {
   const resetHandler = () => {
     setBoard(new Array(9).fill(null));
     setCurPlayerCross(true);
+    setOver(false);
   };
 
   /* dismiss the modal */
@@ -47,6 +49,7 @@ const Board: FC = () => {
     setShowModal(false);
     setBoard(new Array(9).fill(null));
     setCurPlayerCross(true);
+    setOver(false);
   };
 
   return (
@@ -55,10 +58,10 @@ const Board: FC = () => {
       <Grid board={board} makeMoveHandler={makeMoveHandler} />
       {showModal && (
         <Modal
-          title="Restart Game?"
-          leftBtnText="No, Cancel"
+          winner={winner}
+          leftBtnText="Quit"
           leftBtnHandler={cancelRestartHandler}
-          rightBtnText="Yes, Restart"
+          rightBtnText="Next Round"
           rightBtnHandler={restartHandler}
         ></Modal>
       )}

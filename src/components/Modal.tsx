@@ -5,9 +5,7 @@ import {ReactComponent as CircleIcon} from './svg/circle.svg';
 import {ReactComponent as CrossIcon} from './svg/cross.svg';
 
 interface IProps {
-  heading?: string;
-  icon?: string;
-  title: string;
+  winner: string | null;
   leftBtnText: string;
   leftBtnHandler: () => void;
   rightBtnText: string;
@@ -15,23 +13,36 @@ interface IProps {
 }
 
 const Modal: FC<IProps> = ({
-  heading,
-  icon,
-  title,
+  winner,
   leftBtnText,
   leftBtnHandler,
   rightBtnText,
   rightBtnHandler,
 }) => {
+  const determineHeading = () => {
+    if (winner === 'tie') return null;
+    const player = winner === 'o' ? 1 : 2;
+    return `Player ${player} wins!`;
+  };
+
+  const determineTitle = () => {
+    if (winner === 'tie') return 'Round Tied';
+    return 'Takes the round';
+  };
+
+  const determineIcon = () => {
+    if (winner === 'tie') return null;
+    return winner === 'o' ? <CircleIcon /> : <CrossIcon />;
+  };
+
   return (
     <ModalContainer>
       <ModalBody>
-        {heading}
+        <Heading>{determineHeading()}</Heading>
 
         <MessageWrapper>
-          {icon === 'circle' && <CircleIcon />}
-          {icon === 'cross' && <CrossIcon />}
-          {title}
+          {determineIcon()}
+          {determineTitle()}
         </MessageWrapper>
 
         <ButtonWrapper>
@@ -91,7 +102,6 @@ const ModalBody = styled.div`
   transform: translateX(-50%) translateY(-50%);
   background-color: #1f3641;
   padding: 67px;
-  gap: 31px;
   width: 100%;
 `;
 
@@ -105,12 +115,27 @@ const MessageWrapper = styled.div`
   line-height: 50px;
   text-align: center;
   letter-spacing: 2.5px;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 24px;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   gap: 16px;
+`;
+
+const Heading = styled.span`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #a8bfc9;
+  margin-bottom: 16px;
 `;
 
 export default Modal;
